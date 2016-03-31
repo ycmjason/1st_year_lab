@@ -1,0 +1,44 @@
+Event	simulation/Event.java	3
+Print	print3/Print.java	6
+Print.Print	print3/Print.java	/^  public Print(int n) {$/
+Print.invoke	print3/Print.java	/^  public void invoke(Simulation simulation) {$/
+Print.n	print3/Print.java	8
+Print3	print3/Print3.java	5
+Print3.main	print3/Print3.java	/^  public static void main(String args[]) {$/
+Print3.stop	print3/Print3.java	/^  protected boolean stop() {$/
+ScheduledEvent	simulation/ScheduledEvent.java	3
+ScheduledEvent.ScheduledEvent	simulation/ScheduledEvent.java	/^  public ScheduledEvent(Event event, double offset/
+ScheduledEvent.compareTo	simulation/ScheduledEvent.java	/^  public int compareTo(ScheduledEvent se){$/
+ScheduledEvent.event	simulation/ScheduledEvent.java	4
+ScheduledEvent.getEvent	simulation/ScheduledEvent.java	/^  public Event getEvent(){$/
+ScheduledEvent.getOffset	simulation/ScheduledEvent.java	/^  public double getOffset(){$/
+ScheduledEvent.offset	simulation/ScheduledEvent.java	5
+Service	ssq/Service.java	8
+Service.SERVICE_DURATION	ssq/Service.java	9
+Service.invoke	ssq/Service.java	/^  public void invoke(Simulation simulation) {$/
+ServiceEnd	ssq/Service.java	30
+ServiceEnd.invoke	ssq/Service.java	/^  public void invoke(Simulation simulation) {$/
+Simulation	simulation/Simulation.java	6
+Simulation.getCurrentTime	simulation/Simulation.java	/^  public double getCurrentTime(){$/
+Simulation.schedule	simulation/Simulation.java	/^  public void schedule(Event e, double offset){$/
+Simulation.scheduledEvents	simulation/Simulation.java	8
+Simulation.simulate	simulation/Simulation.java	/^  public void simulate(){$/
+Simulation.virtualTime	simulation/Simulation.java	7
+SingleServerQueue	ssq/SingleServerQueue.java	8
+SingleServerQueue.decPopulation	ssq/SingleServerQueue.java	/^  public void decPopulation(){$/
+SingleServerQueue.getPopulation	ssq/SingleServerQueue.java	/^  public int getPopulation(){$/
+SingleServerQueue.getTimeEnd	ssq/SingleServerQueue.java	/^  public double getTimeEnd(){$/
+SingleServerQueue.incPopulation	ssq/SingleServerQueue.java	/^  public void incPopulation(){$/
+SingleServerQueue.isTillBusy	ssq/SingleServerQueue.java	/^  public boolean isTillBusy(){$/
+SingleServerQueue.main	ssq/SingleServerQueue.java	/^  public static void main(String[] args){$/
+SingleServerQueue.nextDepartureTime	ssq/SingleServerQueue.java	9
+SingleServerQueue.nextDepartureTime	ssq/SingleServerQueue.java	/^  public double nextDepartureTime(){$/
+SingleServerQueue.populationCount	ssq/SingleServerQueue.java	11
+SingleServerQueue.scheduleDepart	ssq/SingleServerQueue.java	/^  public void scheduleDepart(double time){$/
+SingleServerQueue.stop	ssq/SingleServerQueue.java	/^  protected boolean stop() {$/
+SingleServerQueue.timeEnd	ssq/SingleServerQueue.java	10
+Tick	ticks/Tick.java	6
+Tick.invoke	ticks/Tick.java	/^  public void invoke(Simulation simulation) {$/
+Ticks	ticks/Ticks.java	6
+Ticks.main	ticks/Ticks.java	/^  public static void main(String[] args){$/
+Ticks.stop	ticks/Ticks.java	/^  protected boolean stop() {$/

@@ -1,0 +1,80 @@
+/* What films made after 1997 last at least 120 minutes? */
+-- q1, columns: title, director, made, length
+SELECT title, director, made, length FROM films WHERE length >= interval '02:00:00' AND made > '1997-01-01';
+
+/* What is the cast of Alfred Hitchcock's Psycho */
+-- q2, columns: name, part
+SELECT name, part FROM casting WHERE title = 'Psycho' AND director = 'Alfred Hitchcock';
+
+
+
+/* What actors appeared in films starting with the letter 'D' */
+-- q3, columns: name, part, title
+SELECT name, part , title FROM casting WHERE title LIKE 'D%'; 
+
+
+
+/* How many films has each director made */
+-- q4, columns: director, filmtotal
+SELECT director, count(DISTINCT title) AS filmtotal FROM casting GROUP BY director;
+
+
+/* Who has appeared in a film with Bruce Willis */
+-- q5, columns: name, part, title
+SELECT a.name, a.part, a.title FROM casting as a INNER JOIN casting as b ON a.title=b.title WHERE b.name = 'Bruce Willis' AND a.name != 'Bruce Willis';
+
+
+/* How many people directed their final film before 1990 */
+-- q6, columns: count
+SELECT COUNT(*) FROM (SELECT name FROM casting NATURAL JOIN films GROUP BY name HAVING max(made)<'1990-01-01') as a;
+
+
+/* Who has appeared in a film by Hitchcock and has acted alongside Ian Holm */
+-- q7, columns: name
+SELECT DISTINCT a.name FROM (SELECT DISTINCT name FROM films NATURAL JOIN casting WHERE director = 'Alfred Hitchcock') AS a NATURAL JOIN (SELECT DISTINCT a.name FROM casting AS a JOIN casting AS b USING (title) WHERE a.name != 'Ian Holm' AND b.name = 'Ian Holm') as b;
+
+
+/* What films are from non-English speaking countries.  
+Optimise your query so that the countries you match against are tested in descending order of frequency in the database, this means the country with the most films will be first.  Count the frequencies: no guessing! */
+-- q8, columns: title, length, year
+SELECT title, length, made AS year FROM films WHERE NOT(origin IN ('US','UK','Australia')) ORDER BY origin DESC;
+
+
+
+/* What films have no listed remakes */
+-- q9, columns: title
+SELECT title FROM films GROUP BY title HAVING count(title)=1;
+
+
+/* Show the years in which any film was made.
+   A year must only appear once in the entire output */
+-- q10, columns: made
+SELECT DISTINCT made FROM films ORDER BY made ASC;
+
+
+/* Show the years in which multiple film were made.
+   A year must only appear once in the entire output */
+-- q11, columns: made
+SELECT DISTINCT made FROM films GROUP BY made HAVING count(*)>1 ORDER BY made ASC;
+
+
+/* What directors, if any, are not in both the films and casting tables as a director? */
+-- q12, columns: director
+SELECT director FROM (SELECT DISTINCT director FROM films
+  UNION ALL
+  SELECT DISTINCT director FROM casting) as a GROUP BY director HAVING count(director)=1;
+
+
+/* In what films has the same actor played the same part more than once */
+-- q13, columns: name, part, title
+SELECT a.name, a.part, a.title FROM casting AS a JOIN casting AS b USING(name, part) WHERE a.title != b.title;
+
+
+/* Show the period that a director who made multiple films was active. */
+-- q14, columns: director, first, last
+SELECT director, min(made) as first, max(made) as last FROM films GROUP BY director HAVING count(*)>1 ORDER BY director ASC;
+
+
+/* What parts have been played by different actors and who played them */
+-- q15, columns: part, title, name, year
+SELECT part, title, name, made AS year FROM (SELECT DISTINCT a.part, a.title, a.name, a.director FROM casting AS a JOIN casting AS b USING(part) where a.name != b.name) AS a NATURAL JOIN films ORDER BY a.title ASC, a.part ASC, made ASC;
